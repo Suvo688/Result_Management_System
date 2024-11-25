@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results - Student Management</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* General Styling */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Animated Background */
+    .result-bg {
+      position: relative;
+      height: 100vh;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Shapes */
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px) translateX(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-50px) translateX(50px) scale(1.2);
+      }
+      100% {
+        transform: translateY(0px) translateX(0px) scale(1);
+      }
+    }
+
+    .shape:nth-child(1) {
+      width: 150px;
+      height: 150px;
+      top: 10%;
+      left: 15%;
+      animation-duration: 8s;
+    }
+
+    .shape:nth-child(2) {
+      width: 100px;
+      height: 100px;
+      top: 50%;
+      left: 35%;
+      animation-duration: 10s;
+    }
+
+    .shape:nth-child(3) {
+      width: 200px;
+      height: 200px;
+      top: 30%;
+      left: 70%;
+      animation-duration: 12s;
+    }
+
+    .shape:nth-child(4) {
+      width: 80px;
+      height: 80px;
+      top: 75%;
+      left: 50%;
+      animation-duration: 14s;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .navbar {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .navbar li a {
+      text-decoration: none;
+      color: white;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .navbar li a:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    form {
+      margin: 20px auto;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      width: 60%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    form .form-group {
+      margin-bottom: 15px;
+    }
+
+    form .form-group input, form button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    form button {
+      background: #2575fc;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    form button:hover {
+      background: #6a11cb;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      color: white;
+    }
+
+    table th, table td {
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      text-align: center;
+    }
+
+    table th {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body class="result-bg">
+  <!-- Floating Shapes -->
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <h1><i class="fas fa-book"></i> Manage Results</h1>
+    <nav>
+      <ul class="navbar">
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="analytics.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+        <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </nav>
+
+    <form id="studentForm">
+      <div class="form-group">
+        <label for="studentId">Student ID:</label>
+        <input type="text" id="studentId" placeholder="Enter Student ID" required>
+      </div>
+      <div class="form-group">
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName" placeholder="Enter Name" required>
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" placeholder="Enter Subject" required>
+      </div>
+      <div class="form-group">
+        <label for="marks">Marks:</label>
+        <input type="number" id="marks" placeholder="Enter Marks" required>
+      </div>
+      <button type="submit"><i class="fas fa-plus"></i> Add Subject Marks</button>
+    </form>
+
+    <h2>Student Records</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Marks</th>
+          <th>Grade</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="studentTable"></tbody>
+    </table>
+  </div>
+
+  <script>
+    document.getElementById('studentForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get input values
+      const studentId = document.getElementById('studentId').value;
+      const studentName = document.getElementById('studentName').value;
+      const subject = document.getElementById('subject').value;
+      const marks = parseFloat(document.getElementById('marks').value);
+
+      // Determine grade
+      let grade;
+      if (marks >= 90) grade = 'A+';
+      else if (marks >= 80) grade = 'A';
+      else if (marks >= 70) grade = 'B';
+      else if (marks >= 60) grade = 'C';
+      else grade = 'F';
+
+      // Create a new row
+      const table = document.getElementById('studentTable');
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <td>${studentId}</td>
+        <td>${studentName}</td>
+        <td>${subject}</td>
+        <td>${marks}</td>
+        <td>${grade}</td>
+        <td>
+          <button class="action-btn edit" onclick="editRow(this)">Edit</button>
+          <button class="action-btn" onclick="deleteRow(this)">Delete</button>
+        </td>
+      `;
+
+      // Append the row to the table
+      table.appendChild(row);
+
+      // Clear the form
+      document.getElementById('studentForm').reset();
+    });
+
+    // Function to delete a row
+    function deleteRow(button) {
+      const row = button.parentElement.parentElement;
+      row.remove();
+    }
+
+    // Function to edit a row
+    function editRow(button) {
+      const row = button.parentElement.parentElement;
+      const cells = row.children;
+
+      // Populate form with current values
+      document.getElementById('studentId').value = cells[0].textContent;
+      document.getElementById('studentName').value = cells[1].textContent;
+      document.getElementById('subject').value = cells[2].textContent;
+      document.getElementById('marks').value = cells[3].textContent;
+
+      // Remove the row
+      row.remove();
+    }
+  </script>
+</body>
+</html>
+</body>
+</html>

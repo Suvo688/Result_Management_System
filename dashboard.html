@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Student Management</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* General Styling */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Animated Background */
+    .dashboard-bg {
+      position: relative;
+      height: 100%;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a1c4fd, #c2e9fb);
+      background-size: 400% 400%;
+      animation: gradientShift 10s infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Particles */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: float 10s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Content Styling */
+    .container {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .navbar {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .navbar li {
+      margin: 0 15px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: background 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .dashboard-content {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .card i {
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .card p {
+      margin: 10px 0 0;
+      font-size: 1.1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body class="dashboard-bg">
+  <!-- Floating Particles -->
+  <div class="particles"></div>
+
+  <div class="container">
+    <h1><i class="fas fa-tachometer-alt"></i> Teacher Dashboard</h1>
+    <nav>
+      <ul class="navbar">
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="results.html"><i class="fas fa-book"></i> Manage Results</a></li>
+        <li><a href="analytics.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+        <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </nav>
+
+    <div class="search-container">
+      <input type="text" id="searchStudent" placeholder="Search student by name or ID">
+      <button class="btn-search" onclick="searchStudent()">Search</button>
+    </div>
+    
+    <style>
+      /* Search Bar Styling */
+      .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 20px auto;
+        padding: 10px;
+        position: relative;
+      }
+    
+      /* Search Input */
+      .search-container input {
+        width: 300px;
+        padding: 10px 15px;
+        border: 2px solid #ccc;
+        border-radius: 25px;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+    
+      .search-container input:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+      }
+    
+      .search-container input::placeholder {
+        color: #aaa;
+        transition: color 0.3s ease;
+      }
+    
+      .search-container input:focus::placeholder {
+        color: transparent;
+      }
+    
+      /* Search Button */
+      .btn-search {
+        background: linear-gradient(45deg, #4CAF50, #45a049);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform 0.3s ease, background 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+    
+      .btn-search:hover {
+        background: linear-gradient(45deg, #45a049, #4CAF50);
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+    
+      .btn-search:active {
+        transform: scale(1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+    
+      /* Glow Effect for Search Container */
+      .search-container:hover {
+        animation: glowEffect 1.5s infinite;
+      }
+    
+      @keyframes glowEffect {
+        0%, 100% {
+          box-shadow: 0 0 10px rgba(76, 175, 80, 0.3), 0 0 20px rgba(76, 175, 80, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 15px rgba(76, 175, 80, 0.5), 0 0 30px rgba(76, 175, 80, 0.3);
+        }
+      }
+    </style>
+    
+
+    <div class="dashboard-content">
+      <div class="card">
+        <i class="fas fa-users"></i>
+        <p>Total Students: 50</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-book"></i>
+        <p>Total Subjects: 8</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-graduation-cap"></i>
+        <p>Average CGPA: 8.2</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container dashboard-container">
+    <h1>Student Dashboard</h1>
+    <nav>
+      <ul class="navbar">
+        <li><a href="result.html">View Results</a></li>
+        <li><a href="practice.html">Practice Tests</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+      </ul>
+    </nav>
+  
+    <div class="dashboard-content">
+      <div class="card">
+        <i class="fas fa-book"></i>
+        <p>Subjects Available: 8</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-chart-line"></i>
+        <p>Performance Improvement: 20%</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Generate Particles
+    const particlesContainer = document.querySelector('.particles');
+    const particleCount = 50; // Number of particles
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.width = particle.style.height = Math.random() * 10 + 'px';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = Math.random() * 5 + 5 + 's';
+      particle.style.animationDelay = Math.random() * 5 + 's';
+      particlesContainer.appendChild(particle);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Management</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-bg">
+  <div class="container">
+    <h1>Teacher Management</h1>
+    <a href="index.html" class="btn">Back to Home</a>
+
+    <form id="teacherForm">
+      <h3>Add Teacher</h3>
+      <div class="form-group">
+        <label for="teacherId">Teacher ID</label>
+        <input type="text" id="teacherId" required>
+      </div>
+      <div class="form-group">
+        <label for="teacherName">Name</label>
+        <input type="text" id="teacherName" required>
+      </div>
+      <div class="form-group">
+        <label for="teacherSubject">Subject</label>
+        <input type="text" id="teacherSubject" required>
+      </div>
+      <button type="submit">Add Teacher</button>
+    </form>
+
+    <h3>Teacher List</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Teacher ID</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="teacherTable"></tbody>
+    </table>
+
+    <h3>Teacher Analytics</h3>
+    <div class="chart-container">
+      <canvas id="teacherAnalyticsChart"></canvas>
+    </div>
+  </div>
+  <script src="scripts.js"></script>
+</body>
+</html>
